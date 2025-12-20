@@ -40,22 +40,11 @@ jobs:
       - name: Build CV
         run: make
 
-      - name: Prepare files for gh-pages
-        run: |
-          mkdir public
-          mv cn/cv.pdf public/DTian_cv_cn.pdf
-          mv en/cv.pdf public/DTian_cv_en.pdf
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
-        if: github.event_name == 'push'
+      - name: Upload PDF artifacts
+        uses: actions/upload-artifact@v4
         with:
-          github_token: ${{ github.token }}
-          publish_dir: ./public
-          force_orphan: true
-
-      - name: Upload the two pdf files as release assets
-        run: gh release upload ${{ github.ref_name }} ./public/DTian_cv_cn.pdf ./public/DTian_cv_en.pdf
-        if: github.event_name == 'release'
-        env:
-          GH_TOKEN: ${{ github.token }}
+          name: cv-pdfs
+          path: |
+            cn/cv.pdf
+            en/cv.pdf
+          retention-days: 30
