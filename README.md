@@ -1,4 +1,4 @@
-# TIAN Dongdong (田冬冬)'s Curriculum Vitae
+# Curriculum Vitae
 
 [![GitHub Release](https://img.shields.io/github/v/release/seisman/cv)](https://github.com/seisman/cv/releases)
 [![Build](https://github.com/seisman/cv/actions/workflows/build.yaml/badge.svg)](https://github.com/seisman/cv/actions/workflows/build.yaml)
