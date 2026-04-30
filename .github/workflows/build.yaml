@@ -19,6 +19,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Build
+    env:
+      TECTONIC_VERSION: 0.16.9
 
     steps:
       - name: Checkout
@@ -28,14 +30,16 @@ jobs:
         uses: actions/cache@v5
         with:
           path: ~/.cache/Tectonic
-          key: ${{ runner.os }}-tectonic-${{ hashFiles('**/*.tex') }}
-          restore-keys: |
-            ${{ runner.os }}-tectonic-
+          key: ${{ runner.os }}-tectonic-${{ env.TECTONIC_VERSION }}-${{ hashFiles('**/*.tex') }}
 
       - name: Setup tectonic
         uses: wtfjoke/setup-tectonic@v4
         with:
           github-token: ${{ github.token }}
+          tectonic-version: ${{ env.TECTONIC_VERSION }}
+
+      - name: Show tectonic version
+        run: tectonic --version
 
       - name: Build CV
         run: make
